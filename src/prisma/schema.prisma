@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id        String    @id @default(cuid())
+  eventId   String    @unique @map("event_id")
+  userId    String    @map("user_id")
+  eventType EventType @map("event_type")
+  payload   Json
+  timestamp DateTime  @default(now())
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  // Performance indexes for analytics queries
+  @@index([eventType])
+  @@index([timestamp])
+  @@index([userId])
+  @@index([eventType, timestamp])
+  @@map("events")
+}
+
+enum EventType {
+  view
+  click
+  location
+}

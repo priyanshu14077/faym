@@ -43,8 +43,8 @@ Request Body:
   "user_id": "user_123",
   "event_type": "view",
   "payload": {
-    "url": "https://example.com",
-    "title": "Example Page"
+    "url": "http://localhost:5000",
+    "title": "Web-analytics"
   }
 }
 
